@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout - Acai Bowl Store</title>
-<link rel="stylesheet" href="style.css">
+<title>Checkout</title>
 </head>
 
 <body>
 
-<h1>Checkout</h1>
+<h1>HALAMAN CHECKOUT</h1>
 
-<div id="pesanan">
-</div>
+<p>Nama Pembeli</p>
+<input type="text">
 
-<input type="text" placeholder="Nama Pembeli" id="nama">
+<p>Alamat</p>
+<input type="text">
 
-<input type="text" placeholder="Alamat" id="alamat">
+<br><br>
 
 <button onclick="pesananBerhasil()">
 Pesanan Sekarang
 </button>
 
-
-<script src="script.js"></script>
+<script>
+function pesananBerhasil(){
+    alert("Pesanan berhasil dibuat!");
+}
+</script>
 
 </body>
 </html>
