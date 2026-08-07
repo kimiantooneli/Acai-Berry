@@ -90,10 +90,26 @@ placeholder="Masukkan nama pembeli...">
 </div>
 
 <button
-onclick="window.location.href='seller.html'"
+onclick="showSellerLogin()"
 style="background:#7d3c98;">
 🏪 Masuk sebagai Penjual
 </button>
+
+<div id="sellerLogin"
+style="display:none;margin-top:20px;">
+
+<input
+type="password"
+id="sellerPassword"
+placeholder="Masukkan password penjual...">
+
+<button
+onclick="loginSeller()"
+style="margin-top:10px;background:#6c3483;">
+Masuk ke Dashboard
+</button>
+
+</div>
 
 </div>
 
@@ -124,6 +140,26 @@ window.location.href="home.html";
 }
 
 </script>
+    function showSellerLogin(){
+
+document.getElementById("sellerLogin").style.display="block"
+    function loginSeller(){
+
+const password=document.getElementById("sellerPassword").value;
+
+if(password==="admin123"){
+
+window.location.href="seller.html";
+
+}else{
+
+alert("Password penjual salah!");
+
+}
+
+}
+
+}
 
 </body>
 </html>
