@@ -1,15 +1,110 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Acai Bowl Store</title>
+  <style>
+    :root { 
+      --primary: #9b59b6; 
+      --primary-hover: #8e44ad;
+      --primary-light: #f3e8f9; 
+      --bg-soft: #fcf8ff; 
+      --white: #ffffff; 
+      --text: #333; 
+      --shadow: 0 4px 15px rgba(155, 89, 182, 0.12); 
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+    body { background-color: var(--bg-soft); color: var(--text); padding-bottom: 40px; }
+    
+    .navbar { background: var(--white); box-shadow: var(--shadow); padding: 15px; position: sticky; top: 0; z-index: 10; }
+    .nav-container { max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .brand { color: var(--primary); font-size: 1.3rem; font-weight: bold; text-decoration: none; }
+    
+    .container { max-width: 600px; margin: 30px auto; padding: 0 15px; }
+    .card { background: var(--white); border-radius: 16px; padding: 25px; box-shadow: var(--shadow); border: 1px solid var(--primary-light); }
+    
+    h2 { color: var(--primary); margin-bottom: 20px; text-align: center; font-size: 1.5rem; }
+    
+    .summary-box { background: var(--primary-light); border-radius: 12px; padding: 15px; margin-bottom: 20px; }
+    .summary-item { display: flex; justify-content: space-between; font-weight: bold; color: var(--primary); font-size: 1.1rem; }
+    
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; color: #555; }
+    .form-control { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; outline: none; }
+    .form-control:focus { border-color: var(--primary); }
+    
+    .btn-checkout { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; margin-top: 10px; transition: 0.2s; }
+    .btn-checkout:hover { background: var(--primary-hover); }
+    .btn-back { display: block; text-align: center; color: #777; text-decoration: none; margin-top: 15px; font-size: 0.85rem; font-weight: 600; }
+  </style>
+</head>
+<body>
 
-<h1>Checkout</h1>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="home.html" class="brand">🍓 Acai Bowl Store</a>
+    </div>
+  </nav>
 
-<div id="pesanan"></div>
+  <div class="container">
+    <div class="card">
+      <h2>🛍️ Form Checkout</h2>
+      
+      <div class="summary-box">
+        <div class="summary-item">
+          <span>Total Pembayaran:</span>
+          <span id="totalDisplay">Rp 0</span>
+        </div>
+      </div>
 
-<input placeholder="Nama Pembeli">
+      <form id="checkoutForm" onsubmit="prosesPesanan(event)">
+        <div class="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" id="nama" class="form-control" placeholder="Masukkan nama kamu" required>
+        </div>
 
-<input placeholder="Alamat">
+        <div class="form-group">
+          <label>Alamat Pengiriman</label>
+          <textarea id="alamat" class="form-control" rows="3" placeholder="Masukkan alamat lengkap" required></textarea>
+        </div>
 
-<button onclick="pesananBerhasil()">
-Pesan Sekarang
-</button>
+        <div class="form-group">
+          <label>Metode Pembayaran</label>
+          <select id="metode" class="form-control" required>
+            <option value="COD">Transfer Bank / QRIS</option>
+            <option value="COD">Cash on Delivery (COD)</option>
+          </select>
+        </div>
 
-</div>
+        <button type="submit" class="btn-checkout">Pesan Sekarang 🎉</button>
+        <a href="cart.html" class="btn-back">← Kembali ke Keranjang</a>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function formatRupiah(num) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
+    }
+
+    function hitungTotal() {
+      const cart = JSON.parse(localStorage.getItem('acai_cart')) || [];
+      const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      document.getElementById('totalDisplay').textContent = formatRupiah(total);
+    }
+
+    function prosesPesanan(e) {
+      e.preventDefault();
+      const nama = document.getElementById('nama').value;
+      alert(`Terima kasih ${nama}! Pesanan kamu berhasil dibuat dan sedang diproses. 🍓`);
+      
+      // Kosongkan keranjang setelah pesanan berhasil
+      localStorage.removeItem('acai_cart');
+      window.location.href = 'home.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', hitungTotal);
+  </script>
+</body>
+        </html>
