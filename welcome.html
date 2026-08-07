@@ -81,9 +81,37 @@ type="text"
 id="username"
 placeholder="Masukkan nama pembeli...">
 
-<button onclick="alert('Tombol berhasil diklik')">
-🛒 Masuk sebagai Pembeli
-</button>
+<script>
+function loginBuyer() {
+
+    const username = document.getElementById("username").value;
+
+    if (username.trim() === "") {
+        alert("Masukkan nama terlebih dahulu!");
+        return;
+    }
+
+    localStorage.setItem("acai_user", username);
+
+    location.href = "./home.html";
+}
+
+function showSellerLogin() {
+    document.getElementById("sellerLogin").style.display = "block";
+}
+
+function loginSeller() {
+
+    const password = document.getElementById("sellerPassword").value;
+
+    if (password === "admin123") {
+        location.href = "./seller.html";
+    } else {
+        alert("Password penjual salah!");
+    }
+
+}
+</script>
 
 <div style="margin:20px 0;color:#888;">
 ──────── atau ────────
