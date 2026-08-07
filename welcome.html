@@ -23,7 +23,7 @@ body{
 
 .card{
     width:350px;
-    background:#fff;
+    background:white;
     padding:30px;
     border-radius:20px;
     box-shadow:0 8px 25px rgba(155,89,182,.2);
@@ -37,7 +37,7 @@ h1{
 
 p{
     color:#666;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 input{
@@ -56,9 +56,9 @@ button{
     border-radius:10px;
     background:#9b59b6;
     color:white;
+    font-size:15px;
     font-weight:bold;
     cursor:pointer;
-    font-size:15px;
     margin-top:10px;
 }
 
@@ -68,6 +68,7 @@ button:hover{
 </style>
 
 </head>
+
 <body>
 
 <div class="card">
@@ -81,37 +82,9 @@ type="text"
 id="username"
 placeholder="Masukkan nama pembeli...">
 
-<script>
-function loginBuyer() {
-
-    const username = document.getElementById("username").value;
-
-    if (username.trim() === "") {
-        alert("Masukkan nama terlebih dahulu!");
-        return;
-    }
-
-    localStorage.setItem("acai_user", username);
-
-    location.href = "./home.html";
-}
-
-function showSellerLogin() {
-    document.getElementById("sellerLogin").style.display = "block";
-}
-
-function loginSeller() {
-
-    const password = document.getElementById("sellerPassword").value;
-
-    if (password === "admin123") {
-        location.href = "./seller.html";
-    } else {
-        alert("Password penjual salah!");
-    }
-
-}
-</script>
+<button onclick="loginBuyer()">
+🛒 Masuk sebagai Pembeli
+</button>
 
 <div style="margin:20px 0;color:#888;">
 ──────── atau ────────
@@ -123,12 +96,14 @@ style="background:#7d3c98;">
 🏪 Masuk sebagai Penjual
 </button>
 
-<div id="sellerLogin" style="display:none;margin-top:20px;">
+<div
+id="sellerLogin"
+style="display:none;margin-top:20px;">
 
 <input
 type="password"
 id="sellerPassword"
-placeholder="Masukkan password penjual...">
+placeholder="Password Penjual">
 
 <button
 onclick="loginSeller()"
