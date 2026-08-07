@@ -59,6 +59,7 @@ button{
     font-weight:bold;
     cursor:pointer;
     font-size:15px;
+    margin-top:10px;
 }
 
 button:hover{
@@ -73,9 +74,8 @@ button:hover{
 
 <h1>🍓 Acai Bowl Store</h1>
 
-<p>Selamat datang! Masukkan namamu untuk mulai berbelanja.</p>
+<p>Selamat datang! Pilih role untuk melanjutkan.</p>
 
-<input
 <input
 type="text"
 id="username"
@@ -85,7 +85,7 @@ placeholder="Masukkan nama pembeli...">
 🛒 Masuk sebagai Pembeli
 </button>
 
-<div style="margin:18px 0;color:#888;">
+<div style="margin:20px 0;color:#888;">
 ──────── atau ────────
 </div>
 
@@ -95,8 +95,7 @@ style="background:#7d3c98;">
 🏪 Masuk sebagai Penjual
 </button>
 
-<div id="sellerLogin"
-style="display:none;margin-top:20px;">
+<div id="sellerLogin" style="display:none;margin-top:20px;">
 
 <input
 type="password"
@@ -105,7 +104,7 @@ placeholder="Masukkan password penjual...">
 
 <button
 onclick="loginSeller()"
-style="margin-top:10px;background:#6c3483;">
+style="background:#6c3483;">
 Masuk ke Dashboard
 </button>
 
@@ -120,18 +119,9 @@ function loginBuyer(){
 const username=document.getElementById("username").value.trim();
 
 if(username===""){
-
-alert("Masukkan nama terlebih dahulu.");
-
+alert("Masukkan nama terlebih dahulu!");
 return;
-
 }
-
-localStorage.setItem("acai_user",username);
-
-window.location.href="home.html";
-
-    }
 
 localStorage.setItem("acai_user",username);
 
@@ -139,11 +129,13 @@ window.location.href="home.html";
 
 }
 
-</script>
-    function showSellerLogin(){
+function showSellerLogin(){
 
-document.getElementById("sellerLogin").style.display="block"
-    function loginSeller(){
+document.getElementById("sellerLogin").style.display="block";
+
+}
+
+function loginSeller(){
 
 const password=document.getElementById("sellerPassword").value;
 
@@ -159,7 +151,7 @@ alert("Password penjual salah!");
 
 }
 
-}
+</script>
 
 </body>
 </html>
