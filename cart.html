@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keranjang - Acai Bowl Store</title>
+
+<style>
+
+:root{
+--primary:#9b59b6;
+--primary-dark:#7d3c98;
+--bg:#fcf8ff;
+--white:#fff;
+--shadow:0 4px 15px rgba(155,89,182,.15);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:var(--bg);
+}
+
+.navbar{
+background:white;
+padding:15px 25px;
+box-shadow:var(--shadow);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.brand{
+font-size:24px;
+font-weight:bold;
+color:var(--primary);
+text-decoration:none;
+}
+
+.container{
+max-width:1000px;
+margin:30px auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:18px;
+box-shadow:var(--shadow);
+margin-bottom:20px;
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.card img{
+width:110px;
+height:110px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.info{
+flex:1;
+}
+
+.name{
+font-size:20px;
+font-weight:bold;
+margin-bottom:8px;
+}
+
+.price{
+color:var(--primary);
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.qty{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.qty button{
+width:35px;
+height:35px;
+border:none;
+border-radius:8px;
+background:#9b59b6;
+color:white;
+cursor:pointer;
+font-size:18px;
+}
+
+.remove{
+background:#e74c3c!important;
+}
+
+.summary{
+background:white;
+padding:20px;
+border-radius:18px;
+box-shadow:var(--shadow);
+}
+
+.summary h2{
+color:#9b59b6;
+margin-bottom:15px;
+}
+
+.checkout{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#9b59b6;
+color:white;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+margin-top:20px;
+}
+
+.checkout:hover{
+background:#7d3c98;
+}
+
+.empty{
+text-align:center;
+padding:50px;
+color:#777;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+
+<a href="home.html" class="brand">
+🍓 Acai Bowl Store
+</a>
+
+<a href="home.html">
+⬅️ Kembali
+</a>
+
+</div>
+
+<div class="container">
+
+<div id="cartItems">
+
+</div>
+
+<div class="summary">
+
+<h2>Ringkasan Belanja</h2>
+
+<p id="totalHarga">
+Total : Rp0
+</p>
+
+<button
+class="checkout"
+onclick="checkout()">
+
+🛒 Checkout
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let cart =
+JSON.parse(localStorage.getItem("acai_cart")) || [];
+
+function rupiah(number){
+
+return new Intl.NumberFormat(
+"id-ID",
+{
+style:"currency",
+currency:"IDR",
+maximumFractionDigits:0
+}
+).format(number);
+
+}
+  function renderCart(){
+
+const container=document.getElementById("cartItems");
+
+container.innerHTML="";
+
+let total=0;
+
+if(cart.length===0){
+
+container.innerHTML=`
+<div class="empty">
+<h2>🛒 Keranjang Masih Kosong</h2>
+<p>Yuk pilih Acai Bowl favoritmu!</p>
+</div>
+`;
+
+document.getElementById("totalHarga").textContent="Total : Rp0";
+
+return;
+
+}
+
+cart.forEach((item,index)=>{
+
+total+=item.price*item.qty;
+
+container.innerHTML+=`
+
+<div class="card">
+
+<img src="${item.image}" alt="${item.name}">
+
+<div class="info">
+
+<div class="name">
+${item.name}
+</div>
+
+<div class="price">
+${rupiah(item.price)}
+</div>
+
+<div class="qty">
+
+<button onclick="minusQty(${index})">
+➖
+</button>
+
+<b>${item.qty}</b>
+
+<button onclick="plusQty(${index})">
+➕
+</button>
+
+<button
+class="remove"
+onclick="hapusProduk(${index})">
+🗑️
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("totalHarga").textContent=
+"Total : "+rupiah(total);
+
+}
+
+function plusQty(index){
+
+cart[index].qty++;
+
+localStorage.setItem(
+"acai_cart",
+JSON.stringify(cart)
+);
+
+renderCart();
+
+}
+
+function minusQty(index){
+
+if(cart[index].qty>1){
+
+cart[index].qty--;
+
+}else{
+
+cart.splice(index,1);
+
+}
+
+localStorage.setItem(
+"acai_cart",
+JSON.stringify(cart)
+);
+
+renderCart();
+
+}
+
+function hapusProduk(index){
+
+cart.splice(index,1);
+
+localStorage.setItem(
+"acai_cart",
+JSON.stringify(cart)
+);
+
+renderCart();
+
+}
+
+function checkout(){
+
+if(cart.length===0){
+
+alert("Keranjang masih kosong!");
+
+return;
+
+}
+
+window.location.href="checkout.html";
+
+}
+
+renderCart();
+
+</script>
+
+</body>
+</html>
