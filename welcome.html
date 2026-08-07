@@ -76,19 +76,30 @@ button:hover{
 <p>Selamat datang! Masukkan namamu untuk mulai berbelanja.</p>
 
 <input
+<input
 type="text"
 id="username"
-placeholder="Masukkan nama...">
+placeholder="Masukkan nama pembeli...">
 
-<button onclick="login()">
-Masuk
+<button onclick="loginBuyer()">
+🛒 Masuk sebagai Pembeli
+</button>
+
+<div style="margin:18px 0;color:#888;">
+──────── atau ────────
+</div>
+
+<button
+onclick="window.location.href='seller.html'"
+style="background:#7d3c98;">
+🏪 Masuk sebagai Penjual
 </button>
 
 </div>
 
 <script>
 
-function login(){
+function loginBuyer(){
 
 const username=document.getElementById("username").value.trim();
 
@@ -99,6 +110,12 @@ alert("Masukkan nama terlebih dahulu.");
 return;
 
 }
+
+localStorage.setItem("acai_user",username);
+
+window.location.href="home.html";
+
+    }
 
 localStorage.setItem("acai_user",username);
 
