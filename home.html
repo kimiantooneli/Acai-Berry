@@ -283,6 +283,13 @@ qty:1
 }
 
 localStorage.setItem("acai_cart",JSON.stringify(cart));
+  localStorage.setItem("acai_cart", JSON.stringify(cart));
+
+alert(JSON.stringify(cart));
+
+updateBadge();
+
+alert(product.name + " berhasil ditambahkan ke keranjang!");
 console.log(cart);
 updateBadge();
 
