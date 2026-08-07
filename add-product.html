@@ -77,8 +77,45 @@ Simpan Produk
 
 function saveProduct(){
 
-alert("Untuk versi tugas ini, produk berhasil ditambahkan 😊");
+const name=document.getElementById("name").value;
+const price=parseInt(document.getElementById("price").value);
+const image=document.getElementById("image").value;
 
+let products=JSON.parse(localStorage.getItem("acai_products"))||[];
+
+products.push({
+id:Date.now().toString(),
+name:name,
+price:price,
+image:image
+});
+
+localStorage.setItem("acai_products",JSON.stringify(products));
+
+alert("Produk berhasil ditambahkan!");
+
+function saveProduct(){
+
+const name=document.getElementById("name").value;
+const price=parseInt(document.getElementById("price").value);
+const image=document.getElementById("image").value;
+
+let products=JSON.parse(localStorage.getItem("acai_products"))||[];
+
+products.push({
+id:Date.now().toString(),
+name:name,
+price:price,
+image:image
+});
+
+localStorage.setItem("acai_products",JSON.stringify(products));
+
+alert("Produk berhasil ditambahkan!");
+
+window.location.href="seller.html";
+
+  }
 window.location.href="seller.html";
 
 }
